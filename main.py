@@ -16,9 +16,8 @@ class Main(object):
   
   def read_emp_from_db(self):
     file_name = self.make_file_path("./DB/emp.txt")
-    file = open(file_name, "r")
-    employee_row_data = file.readlines()
-    file.close()
+    with open(file_name, "r") as file:
+      employee_row_data = file.readlines()
     for line in employee_row_data:
       words = re.split(r"\s+",line)
       emp = employee.Employee()
@@ -30,12 +29,11 @@ class Main(object):
       emp.empManagerId = words[5]
       emp.empDepartmentId = words[6]
       self.employees.append(emp)
-
+   
   def read_department_from_db(self):
     file_name = self.make_file_path("./DB/dep.txt")
-    file = open(file_name, "r")
-    department_row_data = file.readlines()
-    file.close()
+    with open(file_name, "r") as file:
+      department_row_data = file.readlines()
     for line in department_row_data:
       words = re.split(r"\s+",line)
       dep = department.Department()
@@ -43,7 +41,7 @@ class Main(object):
       dep.departmentId = words[1]
       dep.departmentName = words[2]
       self.departments.append(dep)
-  
+    
   def sort_employees_name(self):
     sorted_name_list = self.employees[:]
     return sorted(sorted_name_list, key = lambda emp:emp.empName)
@@ -53,7 +51,7 @@ class Main(object):
     sorted_id_list = self.employees[:]
     return sorted(sorted_id_list, key = lambda emp:emp.empId)
 
-  def print_emp(emp_obj):
+  def print_emp(self, emp_obj):
     print('here')
     print('employee with name: {0}, and born in:{1} with mobile number:{2} and his position is:{3}'.format(emp_obj.empName, emp_obj.empDOB, emp_obj.empPhoneNumber, emp_obj.empPosition))
 
@@ -67,34 +65,35 @@ class Main(object):
 	emp_temp = emp
 	self.print_emp(emp_temp)
 
-  def print_emp(self, emp_obj):
-    print('employee with name: {0}, and born in:{1} with mobile number:{2} and his position is:{3}'.format(emp_obj.empName, emp_obj.empDOB, emp_obj.empPhoneNumber, emp_obj.empPosition))
-
   def emp_with_pos(self, word, eq):
     matched_list = []
     title = ''
     if eq == 1:
-      title = 'The employee with matched position' + word
+      title = 'The employee with matched position ' + word
       eq_exp = r".*(?={0})".format(word)
     else:
       #put the data that doent match specific word
       title = 'The employee with unmatched position ' + word
       eq_exp = r".*(?={0})".format(word)
     file_name = self.make_file_path("./DB/emp.txt")
+    with open(file_name, "r") as file:
+      for line in file:
+	result = re.search(eq_exp, line)
+	if result:
+	  data = result.group().split()
+	  temp_tuple = (data[0], data[2])
+	  matched_list.append(temp_tuple)
+    print(title)
+    for tpl in matched_list:
+      print(tpl)
+    
+  def get_count_with_same_month(month_num):
+    count = 0
+    file_name = self.make_file_path("./DB/emp.txt")
     file = open(file_name, "r")
     for line in file:
       result = re.search(eq_exp, line)
       if result:
 	data = result.group().split()
-	temp_tuple = (data[0], data[2])
-	matched_list.append(temp_tuple)
-    print(title)
-    for tpl in matched_list:
-      print(tpl)
-    
 
-m = Main()
-m.read_emp_from_db()
-x = m.sort_employees_id()
-m.emp_with_pos('emp',1)
-#m.get_emp_info(11315378)
+
