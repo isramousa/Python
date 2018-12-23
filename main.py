@@ -44,4 +44,36 @@ class Main(object):
       dep.departmentName = words[2]
       self.departments.append(dep)
   
+  def sort_employees_name(self):
+    sorted_name_list = self.employees[:]
+    return sorted(sorted_name_list, key = lambda emp:emp.empName)
+    
+    
+  def sort_employees_id(self):
+    sorted_id_list = self.employees[:]
+    return sorted(sorted_id_list, key = lambda emp:emp.empId)
+
+  def print_emp(emp_obj):
+    print('here')
+    print('employee with name: {0}, and born in:{1} with mobile number:{2} and his position is:{3}'.format(emp_obj.empName, emp_obj.empDOB, emp_obj.empPhoneNumber, emp_obj.empPosition))
+
+
+  def get_emp_info(self, employee_id):
+    for emp in self.employees:
+      temp_id = emp.empId
+      print(temp_id == employee_id)
+      if temp_id == employee_id:
+	print('found')
+	emp_temp = emp
+	self.print_emp(emp_temp)
+
+  def print_emp(emp_obj):
+    print('here')
+    print('employee with name: {0}, and born in:{1} with mobile number:{2} and his position is:{3}'.format(emp_obj.empName, emp_obj.empDOB, emp_obj.empPhoneNumber, emp_obj.empPosition))
+
+m = Main()
+m.read_emp_from_db()
+xd = m.sort_employees_name()
+m.get_emp_info(11315378)
+
 
