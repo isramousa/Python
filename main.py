@@ -20,16 +20,16 @@ class Main(object):
     employee_row_data = file.readlines()
     file.close()
     for line in employee_row_data:
-            words = re.split(r"\s+",line)
-            emp = employee.Employee()
-            emp.empName = words[0]
-            emp.empPhoneNumber = words[1]
-            emp.empId = words[2]
-            emp.empDOB = words[3]
-            emp.empPosition = words[4]
-            emp.empManagerId = words[5]
-            emp.empDepartmentId = words[6]
-            self.employees.append(emp)
+      words = re.split(r"\s+",line)
+      emp = employee.Employee()
+      emp.empName = words[0]
+      emp.empPhoneNumber = words[1]
+      emp.empId = words[2]
+      emp.empDOB = words[3]
+      emp.empPosition = words[4]
+      emp.empManagerId = words[5]
+      emp.empDepartmentId = words[6]
+      self.employees.append(emp)
 
   def read_department_from_db(self):
     file_name = self.make_file_path("./DB/dep.txt")
@@ -71,9 +71,5 @@ class Main(object):
     print('here')
     print('employee with name: {0}, and born in:{1} with mobile number:{2} and his position is:{3}'.format(emp_obj.empName, emp_obj.empDOB, emp_obj.empPhoneNumber, emp_obj.empPosition))
 
-m = Main()
-m.read_emp_from_db()
-xd = m.sort_employees_name()
-m.get_emp_info(11315378)
 
 
