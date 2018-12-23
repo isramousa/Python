@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-1 -*-
 class Department(object):
     '''class for department '''
     def __init__(self):
