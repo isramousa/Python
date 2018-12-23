@@ -89,11 +89,13 @@ class Main(object):
     
   def get_count_with_same_month(month_num):
     count = 0
+    exp = r"\/{0}\/".format(month_num)
     file_name = self.make_file_path("./DB/emp.txt")
-    file = open(file_name, "r")
-    for line in file:
-      result = re.search(eq_exp, line)
-      if result:
-	data = result.group().split()
+    with open(file_name, "r") as file:
+      for line in file:
+	result = re.search(exp, line)
+	if result:
+	  count++
+    return count
 
 
