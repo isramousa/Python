@@ -160,22 +160,20 @@ def print_emp_list(emp_list):
   for emp in emp_list:
     print('{0}\t{1}\t{2}\t{3}'.format(emp.empId, emp.empName, emp.empPhoneNumber, emp.empPosition))
 
-
 obj = Main()
- 
+list_numb = [1, 2, 3]
+
 while True:
   #print the list to choose
   choice = input("Enter your choice please!")
   if choice == 1: # global choice to return data by specific input type
   #print the list of input type
     enter_field = input("Enter your input type please!")
-    '''if enter_field == 1:
-    elif enter_field == 2:
-    elif enter_field == 3:
-    elif enter_field == 4:
-    elif enter_field == 5:
-    elif enter_field == 6:
-    elif enter_field == 7:'''
+    searched_data = input('Enter the value you want to search ')
+    if enter_field in list_numb:
+      obj.search_employee_data(enter_field, searched_data)
+    else:
+      obj.search_employee_data(0, searched_data)
   elif choice == 2: #sort by name
     sorted_list_name = obj.sort_employees_name()
     print_emp_list(sorted_list_name)
