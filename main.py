@@ -127,4 +127,33 @@ class Main(object):
       for tpl in list_of_search:
 	print(tpl)
 
-  
+  #get any entry using emp_num
+  def get_entry_by_emp_num(self, emp_num, entry):
+    entry_returned = ""
+    
+    exp = r".*({0}).*".format(emp_num)
+    file_name = self.make_file_path(self.file_emp)
+    with open(file_name, "r") as file:
+      for line in file:
+	result = re.search(exp, line)
+	if result:
+	  data = result.group().split()
+	  if entry == 1:#name
+	    entry_returned = "emp_name: " + str(data[0])
+	  elif entry == 2:#phoneNumber
+	    entry_returned = "phone_number: " + str(data[1])
+	  elif entry == 3:#DOB
+	    entry_returned = "date_of_birth: " + str(data[3])
+	  elif entry == 4:#position
+	    entry_returned = "emp_position: " + str(data[4])
+	  elif entry == 5:#mangerId
+	    entry_returned = "emp_manager_id: " + str(data[5])
+	  elif entry == 6:#departmentId
+	    entry_returned = "emp_department_id: " + str(data[6])
+    return entry_returned
+
+
+m = Main()
+for i in range(1,7):
+  x = m.get_entry_by_emp_num(11315376, i)
+  print(x)	  
