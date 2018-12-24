@@ -87,7 +87,7 @@ class Main(object):
     for tpl in matched_list:
       print(tpl)
     
-  def get_count_with_same_month(month_num):
+  def get_count_with_same_month(self, month_num):
     count = 0
     exp = r"\/{0}\/".format(month_num)
     file_name = self.make_file_path("./DB/emp.txt")
@@ -95,7 +95,9 @@ class Main(object):
       for line in file:
 	result = re.search(exp, line)
 	if result:
-	  count++
+	  count += 1
     return count
+
+
 
 
