@@ -19,6 +19,7 @@ class Main(object):
   
   #read employees from file and added to list_of_emp
   def read_emp_from_db(self):
+    self.employees = []
     file_name = self.make_file_path(self.file_emp)
     with open(file_name, "r") as file:
       employee_row_data = file.readlines()
@@ -36,6 +37,7 @@ class Main(object):
   
   #read department_info from file and added to list_of_dep
   def read_department_from_db(self):
+    self.departments = []
     file_name = self.make_file_path(self.file_dep)
     with open(file_name, "r") as file:
       department_row_data = file.readlines()
@@ -153,7 +155,14 @@ class Main(object):
     return entry_returned
 
 
+def print_emp_list(emp_list):
+  print('ID\t\tname\tphoneNumber\tposition')
+  for emp in emp_list:
+    print('{0}\t{1}\t{2}\t{3}'.format(emp.empId, emp.empName, emp.empPhoneNumber, emp.empPosition))
 
+
+obj = Main()
+ 
 while True:
   #print the list to choose
   choice = input("Enter your choice please!")
@@ -168,7 +177,11 @@ while True:
     elif enter_field == 6:
     elif enter_field == 7:
   elif choice == 2: #sort by name
-  elif choice == 3: #sort by id //must print id here!
+    sorted_list_name = obj.sort_employees_name()
+    print_emp_list(sorted_list_name)
+  elif choice == 3: #sort by id 
+    sorted_list_id = obj.sort_employees_id()
+    print_emp_list(sorted_list_id)
   elif choice == 4: #fetch any data depends on emp_num
     fetched_field = input("Enter your field you want to fetch please!")
     if fetched_field == 1:
