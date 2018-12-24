@@ -69,7 +69,7 @@ class Main(object):
     else:
       #put the data that doent match specific word
       title = 'The employee with unmatched position ' + word
-      eq_exp = r".*(?={0})".format(word)
+      eq_exp = r"^([^\s]*)\s([^\s]*)\s([^\s]*)\s([^\s]*)\s(?!{0})".format(word)
     file_name = self.make_file_path(self.file_emp)
     with open(file_name, "r") as file:
       for line in file:
@@ -78,9 +78,12 @@ class Main(object):
 	  data = result.group().split()
 	  temp_tuple = (data[0], data[2])
 	  matched_list.append(temp_tuple)
-    print(title)
-    for tpl in matched_list:
-      print(tpl)
+    if len(matched_list) == 0:
+      print('No matched items!')
+    else:
+      print(title)
+      for tpl in matched_list:
+	print(tpl)
     
   #count of employee with same month
   def get_count_with_same_month(self, month_num):
@@ -118,7 +121,10 @@ class Main(object):
 	  data = result.group().split()
 	  temp_tuple = (data[0], data[2])
 	  list_of_search.append(temp_tuple) 
-    for tpl in list_of_search:
-      print(tpl)
+    if len(list_of_search) == 0:
+      print('No matched items!')
+    else:
+      for tpl in list_of_search:
+	print(tpl)
 
-
+  
