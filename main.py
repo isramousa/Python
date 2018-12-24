@@ -169,13 +169,13 @@ while True:
   if choice == 1: # global choice to return data by specific input type
   #print the list of input type
     enter_field = input("Enter your input type please!")
-    if enter_field == 1:
+    '''if enter_field == 1:
     elif enter_field == 2:
     elif enter_field == 3:
     elif enter_field == 4:
     elif enter_field == 5:
     elif enter_field == 6:
-    elif enter_field == 7:
+    elif enter_field == 7:'''
   elif choice == 2: #sort by name
     sorted_list_name = obj.sort_employees_name()
     print_emp_list(sorted_list_name)
@@ -184,13 +184,13 @@ while True:
     print_emp_list(sorted_list_id)
   elif choice == 4: #fetch any data depends on emp_num
     fetched_field = input("Enter your field you want to fetch please!")
-    if fetched_field == 1:
+    '''if fetched_field == 1:
     elif fetched_field == 2:
     elif fetched_field == 3:
     elif fetched_field == 4:
     elif fetched_field == 5:
     elif fetched_field == 6:
-    elif fetched_field == 7:
+    elif fetched_field == 7:'''
   elif choice == 5: #return the count of employee depends on month
     month = input("Please enter the month you want to search for:")
     if month >= 1 and month <= 12 :
@@ -200,7 +200,11 @@ while True:
       else:
 	print("The number of employee born in this month is:", count)
   elif choice == 6: #return employees that their position match some word
+    position = input("Please enter the position you want to search for:")
+    obj.emp_with_pos(position, 1)
   elif choice == 7: #return employees that their position doesn't match some word
+    position = input("Please enter the position to return employees who don't match it :")
+    obj.emp_with_pos(position, 0)
 
 
 
