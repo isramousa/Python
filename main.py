@@ -167,7 +167,16 @@ list_numb = [1, 2, 3]
 list_numb_fetch = [1, 2, 3, 4, 5, 6]
 
 while True:
-  #print the list to choose
+  print("""\
+  please enter the choice you need:
+  1- Return emp_num and emp_name for any input field.
+  2- Sort the employee list by names.
+  3- Sort the employee list by Ids.
+  4- Fetch data depends on Emp_id.
+  5- Return the count of employees born in specific month.
+  6- Return the employees that their position matches specific word.
+  7- Return the employees that their position doesn't match specific word.
+  """)
   choice = input("Enter your choice please!")
   if choice == 1: # global choice to return data by specific input type
   #print the list of input type
@@ -177,12 +186,15 @@ while True:
       obj.search_employee_data(enter_field, searched_data)
     else:
       obj.search_employee_data(0, searched_data)
+
   elif choice == 2: #sort by name
     sorted_list_name = obj.sort_employees_name()
     print_emp_list(sorted_list_name)
+
   elif choice == 3: #sort by id 
     sorted_list_id = obj.sort_employees_id()
     print_emp_list(sorted_list_id)
+
   elif choice == 4: #fetch any data depends on emp_num
     #print the list for user to choose
     fetched_field = input("Enter your field you want to fetch please!")
@@ -190,6 +202,7 @@ while True:
     if fetched_field in list_numb_fetch:
       returned_entry = obj.get_entry_by_emp_num(emp_num, fetched_field)
       print(returned_entry)
+
   elif choice == 5: #return the count of employee depends on month
     month = input("Please enter the month you want to search for:")
     if month >= 1 and month <= 12 :
@@ -198,14 +211,17 @@ while True:
 	print("No employee in this month")
       else:
 	print("The number of employee born in this month is:", count)
+
   elif choice == 6: #return employees that their position match some word
     position = input("Please enter the position you want to search for:")
     obj.emp_with_pos(position, 1)
+
   elif choice == 7: #return employees that their position doesn't match some word
     position = input("Please enter the position to return employees who don't match it :")
     obj.emp_with_pos(position, 0)
 
-
+  else:
+    print("UNVALID CHOICE!")
 
 
 
