@@ -152,6 +152,8 @@ class Main(object):
 	    entry_returned = "emp_manager_id: " + str(data[5])
 	  elif entry == 6:#departmentId
 	    entry_returned = "emp_department_id: " + str(data[6])
+	else:
+	  entry_returned = "employee with this number not found!"
     return entry_returned
 
 
@@ -162,6 +164,7 @@ def print_emp_list(emp_list):
 
 obj = Main()
 list_numb = [1, 2, 3]
+list_numb_fetch = [1, 2, 3, 4, 5, 6]
 
 while True:
   #print the list to choose
@@ -181,14 +184,12 @@ while True:
     sorted_list_id = obj.sort_employees_id()
     print_emp_list(sorted_list_id)
   elif choice == 4: #fetch any data depends on emp_num
+    #print the list for user to choose
     fetched_field = input("Enter your field you want to fetch please!")
-    '''if fetched_field == 1:
-    elif fetched_field == 2:
-    elif fetched_field == 3:
-    elif fetched_field == 4:
-    elif fetched_field == 5:
-    elif fetched_field == 6:
-    elif fetched_field == 7:'''
+    emp_num = input("Enter the employee number:")
+    if fetched_field in list_numb_fetch:
+      returned_entry = obj.get_entry_by_emp_num(emp_num, fetched_field)
+      print(returned_entry)
   elif choice == 5: #return the count of employee depends on month
     month = input("Please enter the month you want to search for:")
     if month >= 1 and month <= 12 :
