@@ -192,6 +192,13 @@ while True:
     elif fetched_field == 6:
     elif fetched_field == 7:
   elif choice == 5: #return the count of employee depends on month
+    month = input("Please enter the month you want to search for:")
+    if month >= 1 and month <= 12 :
+      count = obj.get_count_with_same_month(month)
+      if count == 0 :
+	print("No employee in this month")
+      else:
+	print("The number of employee born in this month is:", count)
   elif choice == 6: #return employees that their position match some word
   elif choice == 7: #return employees that their position doesn't match some word
 
