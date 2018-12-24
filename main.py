@@ -131,8 +131,8 @@ class Main(object):
 
   #get any entry using emp_num
   def get_entry_by_emp_num(self, emp_num, entry):
-    entry_returned = ""
-    
+
+    entry_returned = "employee with this number not found!"
     exp = r".*({0}).*".format(emp_num)
     file_name = self.make_file_path(self.file_emp)
     with open(file_name, "r") as file:
@@ -152,8 +152,6 @@ class Main(object):
 	    entry_returned = "emp_manager_id: " + str(data[5])
 	  elif entry == 6:#departmentId
 	    entry_returned = "emp_department_id: " + str(data[6])
-	else:
-	  entry_returned = "employee with this number not found!"
     return entry_returned
 
 
@@ -162,11 +160,7 @@ def print_emp_list(emp_list):
   for emp in emp_list:
     print('{0}\t{1}\t{2}\t{3}'.format(emp.empId, emp.empName, emp.empPhoneNumber, emp.empPosition))
 
-obj = Main()
-list_numb = [1, 2, 3]
-list_numb_fetch = [1, 2, 3, 4, 5, 6]
-
-while True:
+def print_main_menu():
   print("""\
   please enter the choice you need:
   1- Return emp_num and emp_name for any input field.
@@ -177,9 +171,40 @@ while True:
   6- Return the employees that their position matches specific word.
   7- Return the employees that their position doesn't match specific word.
   """)
+
+def print_for_choice_one():
+  print("""\
+  please choose the input field:
+  1- by name.
+  2- by phone number.
+  3- by employee id.
+  4- by date of birth.
+  5- by position.
+  6- by manager id.
+  7- by department id.
+  """)
+
+def print_for_choice_four():
+  print("""\
+  please choose the entry you want to retrive:
+  1-  name.
+  2-  phone number.
+  3-  date of birth.
+  4-  position.
+  5-  manager id.
+  6-  department id.
+  """)
+
+obj = Main()
+list_numb = [1, 2, 3]
+list_numb_fetch = [1, 2, 3, 4, 5, 6]
+
+while True:
+  print_main_menu()
   choice = input("Enter your choice please!")
+  
   if choice == 1: # global choice to return data by specific input type
-  #print the list of input type
+    print_for_choice_one()
     enter_field = input("Enter your input type please!")
     searched_data = input('Enter the value you want to search ')
     if enter_field in list_numb:
@@ -196,7 +221,7 @@ while True:
     print_emp_list(sorted_list_id)
 
   elif choice == 4: #fetch any data depends on emp_num
-    #print the list for user to choose
+    print_for_choice_four()
     fetched_field = input("Enter your field you want to fetch please!")
     emp_num = input("Enter the employee number:")
     if fetched_field in list_numb_fetch:
