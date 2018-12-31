@@ -10,8 +10,8 @@ class Main(object):
     self.departments = []
     self.file_emp = "./DB/emp.txt"
     self.file_dep = "./DB/dep.txt"
-    self.employeeString = ""
-    self.departmentString = ""
+    self.employeeString = []
+    self.departmentString = []
 
   #this method for creating correct path for file to be opend
   def make_file_path(self, file_path):
@@ -26,7 +26,7 @@ class Main(object):
     with open(file_name, "r") as file:
       employee_row_data = file.readlines()
     for line in employee_row_data:
-      self.employeeString += line
+      self.employeeString.append(line)
       words = re.split(r"\s+",line)
       emp = employee.Employee()
       emp.empName = words[0]
@@ -45,7 +45,7 @@ class Main(object):
     with open(file_name, "r") as file:
       department_row_data = file.readlines()
     for line in department_row_data:
-      self.departmentString += line
+      self.departmentString.append(line)
       words = re.split(r"\s+",line)
       dep = department.Department()
       dep.managerId = words[0]
@@ -76,14 +76,12 @@ class Main(object):
       #put the data that doent match specific word
       title = 'The employee with unmatched position ' + word
       eq_exp = r"^(\S*)\s\S*\s(\S*)\s\S*\s(?!{0})".format(word)
-    file_name = self.make_file_path(self.file_emp)
-    with open(file_name, "r") as file:
-      for line in file:
-	result = re.search(eq_exp, line)
-	if result:
-	  data = result.group().split()
-	  temp_tuple = (data[0], data[2])
-	  matched_list.append(temp_tuple)
+    for line in self.employeeString:
+      result = re.search(eq_exp, line)
+      if result:
+	    data = result.group().split()
+	    temp_tuple = (data[0], data[2])
+	    matched_list.append(temp_tuple)
     if len(matched_list) == 0:
       print('No matched items!')
     else:
@@ -93,10 +91,12 @@ class Main(object):
     
   #count of employee with same month
   def get_count_with_same_month(self, month_num):
+    count = 0
     exp = r"\/{0}\/".format(month_num)
-    result = re.findall(exp, self.employeeString, re.M)
-    if result:
-      count = len(result)
+    for line in self.employeeString:
+      result = re.search(exp, line)
+      if result:
+	count += 1
     return count
   
   #search by any type of data
