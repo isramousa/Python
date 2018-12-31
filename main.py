@@ -196,8 +196,6 @@ def print_for_choice_four():
   """)
 
 obj = Main()
-list_numb = [1, 2, 3]
-list_numb_fetch = [1, 2, 3, 4, 5, 6]
 
 while True:
   print_main_menu()
@@ -207,7 +205,7 @@ while True:
     print_for_choice_one()
     enter_field = input("Enter your input type please!")
     searched_data = input('Enter the value you want to search ')
-    if enter_field in list_numb:
+    if enter_field in range(1, 4):
       obj.search_employee_data(enter_field, searched_data)
     else:
       obj.search_employee_data(0, searched_data)
@@ -224,7 +222,7 @@ while True:
     print_for_choice_four()
     fetched_field = input("Enter your field you want to fetch please!")
     emp_num = input("Enter the employee number:")
-    if fetched_field in list_numb_fetch:
+    if fetched_field in range(1, 7):
       returned_entry = obj.get_entry_by_emp_num(emp_num, fetched_field)
       print(returned_entry)
 
