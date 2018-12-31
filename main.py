@@ -71,11 +71,11 @@ class Main(object):
     title = ''
     if eq == 1:
       title = 'The employee with matched position ' + word
-      eq_exp = r".*(?={0})".format(word)
+      eq_exp = r"^(\S*)\s\S*\s(\S*)\s\S*\s(?={0})".format(word)
     else:
       #put the data that doent match specific word
       title = 'The employee with unmatched position ' + word
-      eq_exp = r"^([^\s]*)\s([^\s]*)\s([^\s]*)\s([^\s]*)\s(?!{0})".format(word)
+      eq_exp = r"^(\S*)\s\S*\s(\S*)\s\S*\s(?!{0})".format(word)
     file_name = self.make_file_path(self.file_emp)
     with open(file_name, "r") as file:
       for line in file:
@@ -93,11 +93,7 @@ class Main(object):
     
   #count of employee with same month
   def get_count_with_same_month(self, month_num):
-    count = 0
     exp = r"\/{0}\/".format(month_num)
-    '''file_name = self.make_file_path(self.file_emp)
-    with open(file_name, "r") as file:
-      for line in file:'''
     result = re.findall(exp, self.employeeString, re.M)
     if result:
       count = len(result)
