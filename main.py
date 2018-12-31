@@ -10,6 +10,8 @@ class Main(object):
     self.departments = []
     self.file_emp = "./DB/emp.txt"
     self.file_dep = "./DB/dep.txt"
+    self.employeeString = ""
+    self.departmentString = ""
 
   #this method for creating correct path for file to be opend
   def make_file_path(self, file_path):
@@ -24,6 +26,7 @@ class Main(object):
     with open(file_name, "r") as file:
       employee_row_data = file.readlines()
     for line in employee_row_data:
+      self.employeeString += line
       words = re.split(r"\s+",line)
       emp = employee.Employee()
       emp.empName = words[0]
@@ -34,7 +37,7 @@ class Main(object):
       emp.empManagerId = words[5]
       emp.empDepartmentId = words[6]
       self.employees.append(emp)
-  
+    
   #read department_info from file and added to list_of_dep
   def read_department_from_db(self):
     self.departments = []
@@ -42,6 +45,7 @@ class Main(object):
     with open(file_name, "r") as file:
       department_row_data = file.readlines()
     for line in department_row_data:
+      self.departmentString += line
       words = re.split(r"\s+",line)
       dep = department.Department()
       dep.managerId = words[0]
@@ -198,7 +202,8 @@ def print_for_choice_four():
 obj = Main()
 
 while True:
-  print_main_menu()
+  obj.read_emp_from_db()
+  #print_main_menu()
   choice = input("Enter your choice please!")
   
   if choice == 1: # global choice to return data by specific input type
