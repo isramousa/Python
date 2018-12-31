@@ -234,6 +234,8 @@ while True:
 	print("No employee in this month")
       else:
 	print("The number of employee born in this month is:", count)
+    else:
+	print("please enter a correct month number")
 
   elif choice == 6: #return employees that their position match some word
     position = input("Please enter the position you want to search for:")
