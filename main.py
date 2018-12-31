@@ -95,12 +95,12 @@ class Main(object):
   def get_count_with_same_month(self, month_num):
     count = 0
     exp = r"\/{0}\/".format(month_num)
-    file_name = self.make_file_path(self.file_emp)
+    '''file_name = self.make_file_path(self.file_emp)
     with open(file_name, "r") as file:
-      for line in file:
-	result = re.search(exp, line)
-	if result:
-	  count += 1
+      for line in file:'''
+    result = re.findall(exp, self.employeeString, re.M)
+    if result:
+      count = len(result)
     return count
   
   #search by any type of data
@@ -200,10 +200,11 @@ def print_for_choice_four():
   """)
 
 obj = Main()
-
+obj.read_emp_from_db()
+obj.read_department_from_db()
 while True:
-  obj.read_emp_from_db()
-  #print_main_menu()
+  
+  print_main_menu()
   choice = input("Enter your choice please!")
   
   if choice == 1: # global choice to return data by specific input type
