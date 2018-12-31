@@ -132,9 +132,7 @@ class Main(object):
 
     entry_returned = "employee with this number not found!"
     exp = r".*({0}).*".format(emp_num)
-    file_name = self.make_file_path(self.file_emp)
-    with open(file_name, "r") as file:
-      for line in file:
+    for line in self.employeeString:
 	result = re.search(exp, line)
 	if result:
 	  data = result.group().split()
