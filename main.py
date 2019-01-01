@@ -26,7 +26,6 @@ class Main(object):
       employee_row_data = file.readlines()
     for line in employee_row_data:
       self.employeeStrings += line
-      self.employeeString.append(line)
       words = re.split(r"\s+",line)
       emp = employee.Employee()
       emp.empName = words[0]
@@ -45,7 +44,6 @@ class Main(object):
     with open(file_name, "r") as file:
       department_row_data = file.readlines()
     for line in department_row_data:
-      self.departmentString.append(line)
       words = re.split(r"\s+",line)
       dep = department.Department()
       dep.managerId = words[0]
@@ -143,7 +141,7 @@ class Main(object):
 
 
 def print_emp_list(emp_list):
-  print('ID\t\tname\tphoneNumber\tposition')
+  print('ID\tname\tphoneNumber\tposition')
   for emp in emp_list:
     print('{0}\t{1}\t{2}\t{3}'.format(emp.empId, emp.empName, emp.empPhoneNumber, emp.empPosition))
 
