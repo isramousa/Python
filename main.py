@@ -12,6 +12,7 @@ class Main(object):
     self.file_dep = "./DB/dep.txt"
     self.employeeString = []
     self.departmentString = []
+    self.employeeStrings = ""
 
   #this method for creating correct path for file to be opend
   def make_file_path(self, file_path):
@@ -26,6 +27,7 @@ class Main(object):
     with open(file_name, "r") as file:
       employee_row_data = file.readlines()
     for line in employee_row_data:
+      self.employeeStrings += line
       self.employeeString.append(line)
       words = re.split(r"\s+",line)
       emp = employee.Employee()
@@ -76,27 +78,22 @@ class Main(object):
       #put the data that doent match specific word
       title = 'The employee with unmatched position ' + word
       eq_exp = r"^(\S*)\s\S*\s(\S*)\s\S*\s(?!{0})".format(word)
-    for line in self.employeeString:
-      result = re.search(eq_exp, line)
-      if result:
-	    data = result.group().split()
-	    temp_tuple = (data[0], data[2])
-	    matched_list.append(temp_tuple)
-    if len(matched_list) == 0:
-      print('No matched items!')
-    else:
+    result = re.findall(eq_exp, self.employeeStrings, re.M)
+    if result:
       print(title)
-      for tpl in matched_list:
-	print(tpl)
+      for res in result:
+	print(res)
+    else:
+      print("No Matched item!")
+
     
   #count of employee with same month
   def get_count_with_same_month(self, month_num):
     count = 0
     exp = r"\/{0}\/".format(month_num)
-    for line in self.employeeString:
-      result = re.search(exp, line)
-      if result:
-	count += 1
+    result = re.findall(exp, self.employeeStrings, re.M)
+    if result:
+	count = len(result)
     return count
   
   #search by any type of data
@@ -115,17 +112,13 @@ class Main(object):
       #by id
       exp = r"^([^\s]*)\s.*{0}".format(searched_item)
 
-    for line in self.employeeString:
-	result = re.search(exp, line)
-	if result:
-	  data = result.group().split()
-	  temp_tuple = (data[0], data[2])
-	  list_of_search.append(temp_tuple) 
-    if len(list_of_search) == 0:
-      print('No matched items!')
+    result = re.findall(exp, self.employeeStrings, re.M)
+    if result:
+      for res in result:
+	print(res)
     else:
-      for tpl in list_of_search:
-	print(tpl)
+      print("No Matched item!")
+
 
   #get any entry using emp_num
   def get_entry_by_emp_num(self, emp_num, entry):
