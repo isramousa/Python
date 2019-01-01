@@ -101,16 +101,16 @@ class Main(object):
     list_of_search = []
     if search_type == 0:
       #general issue
-      exp = "^([^\s]*)\s([^\s]*)\s([^\s]*)\s.*{0}".format(searched_item)
+      exp = "^(\S*)\s\S*\s(\S*)\s.*{0}".format(searched_item)
     elif search_type == 1:
       #by name
-      exp = r"^({0})\s([^\s]*)\s([^\s]*)".format(searched_item)
+      exp = r"^({0})\s\S*\s(\S*)".format(searched_item)
     elif search_type == 2:
       #by phone
-      exp = r"^([^\s]*)\s{0}\s([^\s]*)".format(searched_item)
+      exp = r"^(\S*)\s{0}\s(\S*)".format(searched_item)
     elif search_type == 3:
       #by id
-      exp = r"^([^\s]*)\s.*{0}".format(searched_item)
+      exp = r"^(\S*)\s.*({0})".format(searched_item)
 
     result = re.findall(exp, self.employeeStrings, re.M)
     if result:
