@@ -10,8 +10,6 @@ class Main(object):
     self.departments = []
     self.file_emp = "./DB/emp.txt"
     self.file_dep = "./DB/dep.txt"
-    self.employeeString = []
-    self.departmentString = []
     self.employeeStrings = ""
 
   #this method for creating correct path for file to be opend
